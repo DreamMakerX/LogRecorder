@@ -64,7 +64,7 @@ private:
 
 public:	
 	long DefaultStart();
-	long LogRecorderInit(LogParam& strLogParam);
+	long LogRecorderInit(LogParam& logParam);
 	long LogRecorderStart();
 	long LogRecorderStop();
 	long LogRecorderClose();
@@ -74,7 +74,7 @@ public:
 
 private:
 	long MakeLogFileName();
-	bool DeleteOldLogFile(std::string sFileName, time_t cTimer);
+	bool DeleteOldLogFile(std::string fileName, time_t timer);
 	long PrintMessageSingel(const char* msg);
 
 	void LogFileChecking();

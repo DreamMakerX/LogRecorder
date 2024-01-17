@@ -44,14 +44,14 @@ long LogRecorder::DefaultStart()
 	LogRecorderInit(logParam_);
 	return LogRecorderStart();
 }
-long LogRecorder::LogRecorderInit(LogParam& strLogParam)
+long LogRecorder::LogRecorderInit(LogParam& logParam)
 {
 	if (isInit_) {
 		return LogRsp_AlreadyInitialized;
 	}
 	isInit_ = true;
 
-	logParam_ = strLogParam;
+	logParam_ = logParam;
 	MakeLogFileName();
 
 	return 0;
@@ -205,14 +205,14 @@ long LogRecorder::MakeLogFileName()
 	CreateDirectoryMultiple(logParam_.dir_);
 	return 0;
 }
-bool LogRecorder::DeleteOldLogFile(std::string sFileName, time_t cTimer)
+bool LogRecorder::DeleteOldLogFile(std::string fileName, time_t timer)
 {
 	time_t timep;
 	time(&timep);
-	double timeDistance = difftime(timep, cTimer);
+	double timeDistance = difftime(timep, timer);
 	if (timeDistance > (logParam_.keepDays_ * 24 * 60 * 60) && logParam_.keepDays_ != 0) {
 		char SECSsystimechar[0x200] = { 0 };
-		sprintf_s(SECSsystimechar, 0x200, "%s\\%s", logParam_.dir_.c_str(), sFileName.c_str());
+		sprintf_s(SECSsystimechar, 0x200, "%s\\%s", logParam_.dir_.c_str(), fileName.c_str());
 		int i = remove(SECSsystimechar);
 		return true;
 	}
